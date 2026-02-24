@@ -1,2 +1,1 @@
-# douglasmyself.github.io
-Google ads
+google.com, pub-3510251888684803, DIRECT, f08c47fec0942fa0
