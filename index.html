@@ -300,7 +300,7 @@ const ICE=[
  {urls:'stun:global.stun.twilio.com:3478'},
  {urls:['turn:eu-0.turn.peerjs.com:3478','turn:us-0.turn.peerjs.com:3478'],username:'peerjs',credential:'peerjsp'}
 ].concat(TURN_EXTRA);
-const VER='2.1.0'; // mude este número a cada atualização: ele aparece no cantinho da tela
+const VER='2.1.1'; // mude este número a cada atualização: ele aparece no cantinho da tela
 const MAXLV=10; // nível máximo da conta
 const LVB=.02; // bônus de vida e ataque por nível (2%)
 const SKB=1.10; // bônus da recompensa "Habilidade +10% de dano"
@@ -308,6 +308,7 @@ const SKB=1.10; // bônus da recompensa "Habilidade +10% de dano"
    - Com o Google AdSense "H5 Games Ads" carregado na página (função adBreak), o anúncio real é usado.
    - Sem o SDK, SIM_AD=true mostra um anúncio SIMULADO de 5s só para testar. Antes de publicar para valer,
      coloque o script do AdSense no <head> e mude SIM_AD para false (assim ninguém continua sem ver anúncio). */
+const ANUNCIOS=false; // true = liga o "continuar assistindo anúncio" ao ser derrotado (deixe false até o AdSense aprovar)
 const SIM_AD=true;
 const IDLE=5; // segundos parado antes do inimigo atacar (ou de perder a vez no online)
 
@@ -1077,6 +1078,7 @@ function showBuff(){
 let CONG=0,AI=0;
 /* Derrota no solo: oferece continuar com a vida cheia depois de assistir a um anúncio (toda vez que perder) */
 function lose(){
+  if(!ANUNCIOS||PV)return fin(0); // sem anúncios: derrota normal, a partida acaba
   live=0;busy=1;ui();
   setTimeout(()=>{
     if(!G||PV)return;
